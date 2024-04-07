@@ -1,17 +1,39 @@
 # Feet2Walk
 
-Memecoin experiment on self balancing tokens.
-
-Features:
-
-- Memecoin $FEET, with a mechanism to make the mint price exponentially higher with supply increases.
-- Walk NFT that is minted paying with $FEET
-- Walk NFT starts counting blocks since mint as steps and displays it on the Token Image.
-- Walk NFT can be burnt to make $FEET price go down according to how many steps it counted.
-- Contracts are coordinated with FeetCoordinator, which is the owner of both tokens and handles mints and burns.
-- It can even feature a burnAndMintTokens function, to avoid being frontrun when burning to purchase cheaper tokens.
+Experiment on self balancing tokens.
 
 ⚙️ Built using 🏗 Scaffold-ETH 2, NextJS, RainbowKit, Hardhat, Wagmi, Viem, and Typescript.
+
+## Features
+
+It has 3 contracts, a token $FEET, a Walk NFT, and a FeetCoordinator
+
+1. Token $FEET: The mint price increases exponentially with supply initially and then flattens out as it reaches higher prices. This mechanism encourages early adoption while preventing rapid inflation as the token price increases.
+
+2. Walk NFT minting: Minted by paying with 2 $FEET tokens.
+
+- **Benefits of a fixed price of 2 $FEET**: Simplicity and predictability for users, ensuring a consistent cost for minting Walk NFTs.
+- **Risks of a fixed price**: Potential lack of flexibility in adjusting minting costs based on market conditions or token price fluctuations.
+
+3. Walk NFT "step" counting and display: Walk NFTs start counting blocks (steps) since minting and display the step count on the token image (Dynamic SVG).
+
+4. Walk NFT burn Functionality: Walk NFTs can be burnt to decrease the $FEET token price.
+
+- The decreasing power of Walk NFTs increases based on the number of steps counted since minting.
+
+5. FeetCoordinator Contract: Acts as the owner of both tokens and handles minting, burning, and ETH withdrawals by the owner.
+
+6. FeetCoordinator BurnAndMintTokens function: Function to prevent front-running when burning to purchase cheaper tokens. This function enhances the security and fairness of the token ecosystem.
+
+## Economic variables
+
+- $FEET token price: Exponentially increasing at first, flattening out later.
+- Walk NFT price: 2 $FEET (it just takes to $FEET to go for a Walk)
+- Walk NFT decreasing power: Increasing by less at first, and more later, to encourage holding.
+
+## Original idea notes
+
+- Use the DEX lesson curve to display how much burning a Walk NFT would affect the $FEET token price?
 
 ## Requirements
 
@@ -28,8 +50,8 @@ To get started, follow the steps below:
 1. Clone this repo & install dependencies
 
 ```
-git clone https://github.com/scaffold-eth/scaffold-eth-2.git
-cd scaffold-eth-2
+git clone https://github.com/luloxi/Feet2Walk.git
+cd Feet2Walk
 yarn install
 ```
 
