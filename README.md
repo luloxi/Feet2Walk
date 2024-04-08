@@ -23,7 +23,7 @@ It has 3 contracts, a token $FEET, a Walk NFT, and a FeetCoordinator
 
 5. FeetCoordinator Contract: Acts as the owner of both tokens and handles minting, burning, and ETH withdrawals by the owner.
 
-6. FeetCoordinator BurnAndMintTokens function: Function to prevent front-running when burning to purchase cheaper tokens. This function enhances the security and fairness of the token ecosystem.
+6. FeetCoordinator endWalkAndBuyTokens function: Function to prevent front-running when burning to purchase cheaper tokens. This function enhances the security and fairness of the token ecosystem.
 
 ## Economic variables
 
