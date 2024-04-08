@@ -7,7 +7,7 @@ import { GenericContractsDeclaration } from "~~/utils/scaffold-eth/contract";
 const deployedContracts = {
   31337: {
     FeetToken: {
-      address: "0x9A676e781A523b5d0C0e43731313A708CB607508",
+      address: "0x67d269191c92Caf3cD7723F116c85e6E9bf55933",
       abi: [
         {
           type: "constructor",
@@ -450,7 +450,7 @@ const deployedContracts = {
       },
     },
     WalkNFT: {
-      address: "0x0B306BF915C4d645ff596e518fAf3F9669b97016",
+      address: "0xE6E340D132b5f46d1e472DebcD681B2aBc16e57E",
       abi: [
         {
           type: "constructor",
@@ -489,25 +489,6 @@ const deployedContracts = {
               name: "owner",
               type: "address",
               internalType: "address",
-            },
-          ],
-          outputs: [
-            {
-              name: "",
-              type: "uint256",
-              internalType: "uint256",
-            },
-          ],
-          stateMutability: "view",
-        },
-        {
-          type: "function",
-          name: "blocksSinceMint",
-          inputs: [
-            {
-              name: "tokenId",
-              type: "uint256",
-              internalType: "uint256",
             },
           ],
           outputs: [
@@ -1036,7 +1017,7 @@ const deployedContracts = {
       },
     },
     FeetCoordinator: {
-      address: "0x959922bE3CAee4b8Cd9a407cc3ac1C251C2007B1",
+      address: "0xc3e53F4d16Ae77Db1c982e75a937B9f60FE63690",
       abi: [
         {
           type: "constructor",
@@ -1056,7 +1037,7 @@ const deployedContracts = {
         },
         {
           type: "function",
-          name: "DECAY_RATE",
+          name: "DECREASING_POWER_THRESHOLD",
           inputs: [],
           outputs: [
             {
@@ -1082,7 +1063,20 @@ const deployedContracts = {
         },
         {
           type: "function",
-          name: "INITIAL_DECAY_FACTOR",
+          name: "FINAL_DECREASING_POWER",
+          inputs: [],
+          outputs: [
+            {
+              name: "",
+              type: "uint256",
+              internalType: "uint256",
+            },
+          ],
+          stateMutability: "view",
+        },
+        {
+          type: "function",
+          name: "INITIAL_DECREASING_POWER",
           inputs: [],
           outputs: [
             {
@@ -1109,19 +1103,6 @@ const deployedContracts = {
         {
           type: "function",
           name: "MAX_MINT_PRICE",
-          inputs: [],
-          outputs: [
-            {
-              name: "",
-              type: "uint256",
-              internalType: "uint256",
-            },
-          ],
-          stateMutability: "view",
-        },
-        {
-          type: "function",
-          name: "MIN_DECAY_FACTOR",
           inputs: [],
           outputs: [
             {
@@ -1164,24 +1145,6 @@ const deployedContracts = {
           inputs: [
             {
               name: "tokenId",
-              type: "uint256",
-              internalType: "uint256",
-            },
-          ],
-          outputs: [],
-          stateMutability: "nonpayable",
-        },
-        {
-          type: "function",
-          name: "endWalkAndBuyTokens",
-          inputs: [
-            {
-              name: "tokenId",
-              type: "uint256",
-              internalType: "uint256",
-            },
-            {
-              name: "amount",
               type: "uint256",
               internalType: "uint256",
             },

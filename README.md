@@ -19,7 +19,7 @@ It has 3 contracts, a token $FEET, a Walk NFT, and a FeetCoordinator
 
 4. Walk NFT burn Functionality: Walk NFTs can be burnt to decrease the $FEET token price.
 
-- The decreasing power of Walk NFTs increases based on the number of steps counted since minting.
+- Walk NFTs contribute to decreasing the $FEET token price over time.
 
 5. FeetCoordinator Contract: Acts as the owner of both tokens and handles minting, burning, and ETH withdrawals by the owner.
 
@@ -29,7 +29,6 @@ It has 3 contracts, a token $FEET, a Walk NFT, and a FeetCoordinator
 
 - $FEET token price: Exponentially increasing at first, flattening out later.
 - Walk NFT price: 2 $FEET (it just takes two $FEET to go for a Walk)
-- Walk NFT decreasing power: Increasing by less at first, and more later, to encourage holding.
 
 ## Original idea notes
 
