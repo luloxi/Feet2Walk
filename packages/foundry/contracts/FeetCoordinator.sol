@@ -1,12 +1,11 @@
 pragma solidity ^0.8.0;
 
-import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
-import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
-import "@openzeppelin/contracts/access/Ownable.sol";
-import "./WalkNFT.sol";
+import {Ownable} from "@openzeppelin/contracts/access/Ownable.sol";
+import {WalkNFT} from "./WalkNFT.sol";
+import {FeetToken} from "./FeetToken.sol";
 
 contract FeetCoordinator is Ownable {
-    IERC20 private _feetToken;
+    FeetToken private _feetToken;
     WalkNFT private _walkNFT;
 
     uint256 public constant INITIAL_MINT_PRICE = 0.0001 ether;
@@ -21,7 +20,7 @@ contract FeetCoordinator is Ownable {
     uint256 private _deploymentBlock; // Block number when the contract is deployed
 
     constructor(address feetToken, address walkNFT) Ownable(msg.sender) {
-        _feetToken = IERC20(feetToken);
+        _feetToken = FeetToken(feetToken);
         _walkNFT = WalkNFT(walkNFT);
         _deploymentBlock = block.number; // Record the block number when the contract is deployed
     }

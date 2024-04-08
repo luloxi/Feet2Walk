@@ -21,7 +21,7 @@ contract WalkNFT is ERC721, ERC721Burnable, Ownable {
     }
 
     function blocksSinceMint(uint256 tokenId) public view returns (uint256) {
-        require(_exists(tokenId), "Token ID does not exist");
+        require(_ownerOf(tokenId) != address(0), "Token ID does not exist");
         return block.number - _mintBlockNumber[tokenId]; // Calculate the number of blocks since minting
     }
 }

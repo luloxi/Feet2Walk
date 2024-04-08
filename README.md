@@ -28,7 +28,7 @@ It has 3 contracts, a token $FEET, a Walk NFT, and a FeetCoordinator
 ## Economic variables
 
 - $FEET token price: Exponentially increasing at first, flattening out later.
-- Walk NFT price: 2 $FEET (it just takes to $FEET to go for a Walk)
+- Walk NFT price: 2 $FEET (it just takes two $FEET to go for a Walk)
 - Walk NFT decreasing power: Increasing by less at first, and more later, to encourage holding.
 
 ## Original idea notes
