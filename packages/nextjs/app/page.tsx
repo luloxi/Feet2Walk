@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import type { NextPage } from "next";
 
 const Home: NextPage = () => {
@@ -16,23 +17,12 @@ const Home: NextPage = () => {
               <strong>Express your love for feet</strong> with your crypto!
             </p>
             <div className="flex flex-row justify-center gap-3">
-              <button className="btn btn-primary">Get some $FEET</button>
-              <button className="btn btn-secondary">Go for a Walk NFT</button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="flex items-center flex-col flex-grow pt-10">
-        <div className="card w-96 glass">
-          <figure>
-            <img src="https://draxe.com/wp-content/uploads/2021/07/DrAxeHotFeetHeader.jpg" alt="car!" />
-          </figure>
-          <div className="card-body">
-            <h2 className="card-title">Get your $FEET ready!</h2>
-            <p>How much $FEET do you want to buy?</p>
-            <div className="card-actions justify-end">
-              <button className="btn btn-primary">Learn now!</button>
+              <Link href={"/buytokens"}>
+                <button className="btn btn-primary">Get some $FEET</button>
+              </Link>
+              <Link href={"/walknft"}>
+                <button className="btn btn-secondary">Go for a Walk NFT</button>
+              </Link>
             </div>
           </div>
         </div>
