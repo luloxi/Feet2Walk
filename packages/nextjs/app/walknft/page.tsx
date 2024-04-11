@@ -1,8 +1,38 @@
 "use client";
 
+import Image from "next/image";
 import type { NextPage } from "next";
+import { formatEther } from "viem";
+import { useAccount } from "wagmi";
+import { useDeployedContractInfo, useScaffoldContractRead, useScaffoldContractWrite } from "~~/hooks/scaffold-eth";
 
 const Home: NextPage = () => {
+  const { address } = useAccount();
+
+  const { data: feetCoordinatorData } = useDeployedContractInfo("FeetCoordinator");
+
+  const { data: costPerToken } = useScaffoldContractRead({
+    contractName: "FeetCoordinator",
+    functionName: "getCostPerToken",
+  });
+
+  const { data: tokenBalance } = useScaffoldContractRead({
+    contractName: "FeetToken",
+    functionName: "balanceOf",
+    args: [address],
+  });
+
+  const { writeAsync: goWalk } = useScaffoldContractWrite({
+    contractName: "FeetCoordinator",
+    functionName: "goWalk",
+  });
+
+  const { writeAsync: approve } = useScaffoldContractWrite({
+    contractName: "FeetToken",
+    functionName: "approve",
+    args: [feetCoordinatorData?.address, BigInt(2)],
+  });
+
   return (
     <>
       <div className="hero" style={{ backgroundImage: "url(/feet-horizontal.jpg)" }}>
@@ -21,14 +51,45 @@ const Home: NextPage = () => {
 
       <div className="flex items-center flex-col flex-grow pt-10">
         <div className="card w-96 glass">
+          <div className="card-body">
+            <h2 className="card-title justify-center text-center">
+              Current price per $FEET:
+              <br /> {costPerToken ? formatEther(costPerToken) + " ETH" : "Loading..."}
+            </h2>
+          </div>
+        </div>
+      </div>
+
+      <div className="flex items-center flex-col flex-grow pt-10">
+        <div className="card w-96 glass">
           <figure>
-            <img src="https://draxe.com/wp-content/uploads/2021/07/DrAxeHotFeetHeader.jpg" alt="car!" />
+            <Image src="/feet-walking.jpg" alt="feet!" />
           </figure>
           <div className="card-body">
-            <h2 className="card-title">Get your $FEET ready!</h2>
-            <p>How much $FEET do you want to buy?</p>
+            <h2 className="card-title">Go for a Walk NFT!</h2>
+            <p>
+              It takes 2 $FEET to go for a Walk!
+              <br />
+              You hold <strong>{tokenBalance?.toString()} $FEET</strong>
+            </p>
+
             <div className="card-actions justify-end">
-              <button className="btn btn-primary">Learn now!</button>
+              <button
+                className="btn btn-secondary bg-orange-700"
+                onClick={() => {
+                  approve();
+                }}
+              >
+                Approve 2 $FEET
+              </button>
+              <button
+                className="btn btn-primary"
+                onClick={() => {
+                  goWalk();
+                }}
+              >
+                Mint Walk NFT
+              </button>
             </div>
           </div>
         </div>

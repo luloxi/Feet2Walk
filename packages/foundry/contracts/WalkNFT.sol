@@ -32,7 +32,7 @@ contract WalkNFT is ERC721, ERC721Burnable, Ownable {
     ) internal pure returns (uint256) {
         // Logic to calculate the lock duration based on token ID
         // In this example, we increase the lock duration linearly with the token ID
-        return (tokenId * 1 days); // Increase lock duration linearly with token ID
+        return (tokenId * 1 minutes); // Increase lock duration linearly with token ID
     }
 
     function _canBurn(uint256 tokenId) internal view returns (bool) {

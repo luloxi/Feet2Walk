@@ -1,8 +1,38 @@
 "use client";
 
+import { useState } from "react";
+import Image from "next/image";
 import type { NextPage } from "next";
+import { formatEther } from "viem";
+import { useAccount } from "wagmi";
+import { InputBase } from "~~/components/scaffold-eth";
+import { useScaffoldContractRead, useScaffoldContractWrite } from "~~/hooks/scaffold-eth";
 
 const Home: NextPage = () => {
+  const [tokenAmount, setTokenAmount] = useState(0);
+
+  const { address } = useAccount();
+
+  const { data: costPerToken } = useScaffoldContractRead({
+    contractName: "FeetCoordinator",
+    functionName: "getCostPerToken",
+  });
+
+  const { data: tokenBalance } = useScaffoldContractRead({
+    contractName: "FeetToken",
+    functionName: "balanceOf",
+    args: [address],
+  });
+
+  const weiValue = costPerToken ? BigInt(tokenAmount) * costPerToken : BigInt(0);
+
+  const { writeAsync: buyTokens } = useScaffoldContractWrite({
+    contractName: "FeetCoordinator",
+    functionName: "buyTokens",
+    args: [BigInt(tokenAmount)],
+    value: weiValue,
+  });
+
   return (
     <>
       <div className="hero " style={{ backgroundImage: "url(/feet-banner.jpg)" }}>
@@ -22,13 +52,23 @@ const Home: NextPage = () => {
       <div className="flex items-center flex-col flex-grow pt-10">
         <div className="card w-96 glass">
           <figure>
-            <img src="https://draxe.com/wp-content/uploads/2021/07/DrAxeHotFeetHeader.jpg" alt="car!" />
+            <Image src="https://draxe.com/wp-content/uploads/2021/07/DrAxeHotFeetHeader.jpg" alt="feet!" />
           </figure>
           <div className="card-body">
             <h2 className="card-title">Get your $FEET ready!</h2>
-            <p>How much $FEET do you want to buy?</p>
+            <p>Soon you&apos;ll know ALL the wonderful things you can do with your $FEET!</p>
+
+            <p>
+              You hold {tokenBalance?.toString()} $FEET
+              <br />
+              Current price per $FEET: {costPerToken ? formatEther(costPerToken) + " ETH" : "Loading..."}
+            </p>
+
+            <InputBase placeholder={"How many $FEET do you need?"} value={tokenAmount} onChange={setTokenAmount} />
             <div className="card-actions justify-end">
-              <button className="btn btn-primary">Learn now!</button>
+              <button className="btn btn-primary bg-green-700 border-green-600" onClick={() => buyTokens()}>
+                Buy {tokenAmount} $FEET
+              </button>
             </div>
           </div>
         </div>

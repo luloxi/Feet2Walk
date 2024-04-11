@@ -10,13 +10,9 @@ contract FeetCoordinator is Ownable {
     WalkNFT private _walkNFT;
 
     uint256 public constant INITIAL_MINT_PRICE = 0.0001 ether;
-    uint256 public constant PRICE_INCREASE_RATE = 10;
+    uint256 public constant PRICE_INCREASE_RATE = 2;
     uint256 public constant MAX_MINT_PRICE = 1 ether;
     uint256 public constant FEET_TO_WALK_PRICE = 2;
-
-    uint256 public constant INITIAL_DECREASING_POWER = 1; // Initial Walk NFT decreasing power
-    uint256 public constant FINAL_DECREASING_POWER = 10; // Final Walk NFT decreasing power
-    uint256 public constant DECREASING_POWER_THRESHOLD = 1000; // Threshold to switch from initial to final decreasing power
 
     uint256 public totalBurnedWalkNFTs;
 
@@ -27,19 +23,23 @@ contract FeetCoordinator is Ownable {
 
     function buyTokens(uint256 amount) public payable {
         uint256 currentPrice = _calculateMintPrice(amount);
-        require(
-            currentPrice <= MAX_MINT_PRICE,
-            "Total cost exceeds maximum mint price"
-        );
         require(msg.value == currentPrice, "Incorrect Ether value");
         _feetToken.mint(msg.sender, amount);
         payable(owner()).transfer(msg.value);
     }
 
+    function withdraw() public onlyOwner {
+        (bool success, ) = payable(owner()).call{value: address(this).balance}(
+            ""
+        );
+        require(success, "Failed to send Ether");
+    }
+
     function goWalk() public {
         require(
-            _feetToken.balanceOf(msg.sender) >= FEET_TO_WALK_PRICE,
-            "Insufficient $FEET balance"
+            _feetToken.allowance(msg.sender, address(this)) >=
+                FEET_TO_WALK_PRICE,
+            "Insufficient $FEET allowance"
         );
         _feetToken.transferFrom(msg.sender, address(this), FEET_TO_WALK_PRICE);
         _walkNFT.safeMint(msg.sender);
@@ -63,11 +63,14 @@ contract FeetCoordinator is Ownable {
     ) internal view returns (uint256) {
         uint256 tokensMinted = _feetToken.totalSupply();
         uint256 currentPrice = INITIAL_MINT_PRICE *
-            (PRICE_INCREASE_RATE ** tokensMinted) *
+            (PRICE_INCREASE_RATE * tokensMinted) *
             amount;
 
-        // Adjust mint price based on the number of burned Walk NFTs
-        currentPrice -= totalBurnedWalkNFTs * 1000; // Decrease the mint price by 1000 wei for each burned Walk NFT
+        // Calculate the reduction factor for burned NFTs (10% reduction per burn)
+        uint256 reductionFactor = totalBurnedWalkNFTs * 10;
+
+        // Reduce the current price by the calculated reduction factor
+        currentPrice -= (currentPrice * reductionFactor) / 100;
 
         if (currentPrice > MAX_MINT_PRICE) {
             currentPrice = MAX_MINT_PRICE;
@@ -75,10 +78,7 @@ contract FeetCoordinator is Ownable {
         return currentPrice;
     }
 
-    function withdraw() public onlyOwner {
-        (bool success, ) = payable(owner()).call{value: address(this).balance}(
-            ""
-        );
-        require(success, "Failed to send Ether");
+    function getCostPerToken() public view returns (uint256) {
+        return _calculateMintPrice(1);
     }
 }
