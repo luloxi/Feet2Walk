@@ -7,7 +7,7 @@ import { GenericContractsDeclaration } from "~~/utils/scaffold-eth/contract";
 const deployedContracts = {
   31337: {
     FeetToken: {
-      address: "0x2E2Ed0Cfd3AD2f1d34481277b3204d807Ca2F8c2",
+      address: "0x46b142DD1E924FAb83eCc3c08e4D46E82f005e0E",
       abi: [
         {
           type: "constructor",
@@ -450,7 +450,7 @@ const deployedContracts = {
       },
     },
     WalkNFT: {
-      address: "0xD8a5a9b31c3C0232E196d518E89Fd8bF83AcAd43",
+      address: "0xC9a43158891282A2B1475592D5719c001986Aaec",
       abi: [
         {
           type: "constructor",
@@ -1017,7 +1017,7 @@ const deployedContracts = {
       },
     },
     FeetCoordinator: {
-      address: "0xDC11f7E700A4c898AE5CAddB1082cFfa76512aDD",
+      address: "0x1c85638e118b37167e9298c2268758e058DdfDA0",
       abi: [
         {
           type: "constructor",

@@ -23,7 +23,7 @@ contract WalkNFT is ERC721, ERC721Burnable, Ownable {
     }
 
     function burn(uint256 tokenId) public override {
-        require(_canBurn(tokenId), "Walk NFT is still locked");
+        // require(_canBurn(tokenId), "Walk NFT is still locked");
         super.burn(tokenId);
     }
 
