@@ -7,7 +7,7 @@ import { GenericContractsDeclaration } from "~~/utils/scaffold-eth/contract";
 const deployedContracts = {
   31337: {
     FeetToken: {
-      address: "0x46b142DD1E924FAb83eCc3c08e4D46E82f005e0E",
+      address: "0x01c1DeF3b91672704716159C9041Aeca392DdFfb",
       abi: [
         {
           type: "constructor",
@@ -450,7 +450,7 @@ const deployedContracts = {
       },
     },
     WalkNFT: {
-      address: "0xC9a43158891282A2B1475592D5719c001986Aaec",
+      address: "0x02b0B4EFd909240FCB2Eb5FAe060dC60D112E3a4",
       abi: [
         {
           type: "constructor",
@@ -528,6 +528,19 @@ const deployedContracts = {
               name: "",
               type: "address",
               internalType: "address",
+            },
+          ],
+          stateMutability: "view",
+        },
+        {
+          type: "function",
+          name: "getTokenCounter",
+          inputs: [],
+          outputs: [
+            {
+              name: "",
+              type: "uint256",
+              internalType: "uint256",
             },
           ],
           stateMutability: "view",
@@ -727,7 +740,7 @@ const deployedContracts = {
           name: "tokenURI",
           inputs: [
             {
-              name: "tokenId",
+              name: "id",
               type: "uint256",
               internalType: "uint256",
             },
@@ -740,6 +753,24 @@ const deployedContracts = {
             },
           ],
           stateMutability: "view",
+        },
+        {
+          type: "function",
+          name: "transfer",
+          inputs: [
+            {
+              name: "to",
+              type: "address",
+              internalType: "address",
+            },
+            {
+              name: "tokenId",
+              type: "uint256",
+              internalType: "uint256",
+            },
+          ],
+          outputs: [],
+          stateMutability: "nonpayable",
         },
         {
           type: "function",
@@ -1017,7 +1048,7 @@ const deployedContracts = {
       },
     },
     FeetCoordinator: {
-      address: "0x1c85638e118b37167e9298c2268758e058DdfDA0",
+      address: "0x638A246F0Ec8883eF68280293FFE8Cfbabe61B44",
       abi: [
         {
           type: "constructor",

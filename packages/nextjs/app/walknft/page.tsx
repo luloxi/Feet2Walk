@@ -3,6 +3,7 @@
 import type { NextPage } from "next";
 import { formatEther } from "viem";
 import { useAccount } from "wagmi";
+import NFTContainer from "~~/components/feet2walk/NFTContainer";
 import { useDeployedContractInfo, useScaffoldContractRead, useScaffoldContractWrite } from "~~/hooks/scaffold-eth";
 
 const Home: NextPage = () => {
@@ -93,6 +94,8 @@ const Home: NextPage = () => {
           </div>
         </div>
       </div>
+
+      <NFTContainer connectedAddress={address} />
     </>
   );
 };

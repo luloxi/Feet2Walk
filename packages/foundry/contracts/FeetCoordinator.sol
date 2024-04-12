@@ -46,11 +46,6 @@ contract FeetCoordinator is Ownable {
     }
 
     function endWalk(uint256 tokenId) public {
-        // require(
-        //     _walkNFT.ownerOf(tokenId) == msg.sender,
-        //     "You don't own this Walk NFT"
-        // );
-
         // Burn the Walk NFT
         _walkNFT.burn(tokenId);
 

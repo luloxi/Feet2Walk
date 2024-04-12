@@ -50,6 +50,17 @@ const Home: NextPage = () => {
 
       <div className="flex items-center flex-col flex-grow pt-10">
         <div className="card w-96 glass">
+          <div className="card-body">
+            <h2 className="card-title justify-center text-center">
+              Current price per $FEET:
+              <br /> {costPerToken ? formatEther(costPerToken) + " ETH" : "Loading..."}
+            </h2>
+          </div>
+        </div>
+      </div>
+
+      <div className="flex items-center flex-col flex-grow pt-10">
+        <div className="card w-96 glass">
           <figure>
             <img src="https://draxe.com/wp-content/uploads/2021/07/DrAxeHotFeetHeader.jpg" alt="feet!" />
           </figure>
